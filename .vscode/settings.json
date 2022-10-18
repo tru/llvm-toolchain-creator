@@ -1,0 +1,6 @@
+{
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "${workspaceFolder}\\venv\\Scripts\\black.exe",
+  "editor.tabSize": 4,
+  "editor.formatOnSave": true
+}
