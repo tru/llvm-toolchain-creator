@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import List
 import os
 from doit import get_var
+import platform
 from .globals import llvm_version
 
 
@@ -24,8 +25,16 @@ class AllPaths:
         return self.release / "sources"
 
     @property
+    def build(self) -> Path:
+        return self.release / "build"
+
+    @property
     def all(self) -> List[Path]:
-        return [self.release, self.downloads, self.sources]
+        return [self.release, self.downloads, self.sources, self.build]
+
+    @property
+    def host_cache(self) -> Path:
+        return self.root / "cmake" / platform.system().lower()
 
 
 Paths = AllPaths()
@@ -36,5 +45,5 @@ def create_paths() -> None:
         os.makedirs(str(path), exist_ok=True)
 
 
-def all_paths() -> List[Path]:
+def all_paths() -> List[str]:
     return [str(path) for path in Paths.all]
